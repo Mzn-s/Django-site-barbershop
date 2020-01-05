@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Наши работы</title>
+    <link href="{% static 'css/style3.min.css' %}" rel="stylesheet"> 
+</head>
+  <style>
+   .col-sm-4 {
+    border: 4px;
+    background: #FFFFFF;
+    padding: 20px; 
+   }
+   .product_list{
+   border-left: 80px solid #FFFFFF;
+   }
+   .col-sm-3{
+   border-left: 80px solid #FFFFFF;
+   }
+   .qqq{
+   font-size: 20px;
+   font-weight: 600;
+   font-color: #FFFFFF;
+   }
+   A {
+    color: black; /* Цвет ссылок */
+   }
+	.page-footer{
+	border-top: 280px solid #FFFFFF;
+	}
+  </style>
+<body>
+<header class="page-header">
+    <h1 class="visually-hidden">Барбершоп «Бородинский» - истинно мужская классика</h1>
+    <div class="page-header__logo  page-header__logo--inner-page">
+    <picture>
+            <source media="(min-width: 1200px)" srcset= "{% static 'img/logotype-desktop.svg' %}">
+            <source media="(min-width: 768px)" srcset= "{% static 'img/logotype-tablet.svg' %}">
+            <img src="{% static 'img/logotype-mobile.svg' %}" width="370" height="153" alt="Барбершоп «Бородинский»">
+    </picture>
+    </div>
+    <nav class="main-nav  main-nav--closed  main-nav--nojs">
+        <div class="main-nav__wrapper">
+            <ul class="main-nav__items">
+                <li class="main-nav__item"><a href="index.html">Главная</a></li>
+                <li class="main-nav__item  main-nav__item--active"><a>Наши работы</a></li>
+                <li class="main-nav__item"><a href="{% url 'page_contact' %}">Записаться</a></li>
+                <li class="main-nav__item"><a href="#">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+{% block title %}
+  {{ product.name }}
+{% endblock %}
+
+{% block content %}
+<div id="main" class="product_list col-sm-9">
+  <div class="product-detail">
+    <div class="col-sm-4">
+      <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no-image.jpg"%}{% endif %}" class="img-responsive">
+    </div>
+    <div class="col-sm-8">
+      <h1>{{ product.name }}</h1>
+      <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
+      <p class="price">{{ product.price }} руб.</p>
+      <span>{{ product.description | linebreaks}}</span>
+    </div>
+  </div>
+   </div>
+{% endblock %}
+
+<footer class="page-footer">
+    <div class="page-footer__wrapper">
+        <p class="page-footer__contacts">
+            <b>Барбершоп Бородинский</b>
+			<a class="btn" >г. Санкт-Петербург, ул. Большая Конюшенная 19/8<br>
+            <a class="btn" href="tel:+78125556666">
+                <span class="page-footer__phone-show">Тел.:</span> +7 (812) 555-66-66
+            </a>
+        </p>
+        <p class="page-footer__social">
+            <span class="page-footer__social-titleclass="btn"">Давайте дружить!</span>
+            <span class="social-links">
+            <a class="social-link  social-link--vk" href="#">Мы в Вконтакте</a>
+            <a class="social-link  social-link--fb" href="#">Мы в Фейсбуке</a>
+            <a class="social-link  social-link--ig" href="#">Мы в Инстаграме</a>
+      </span>
+        </p>
+        <p class="page-footer__copyright">
+            Разработано:
+            <a class="btn" href="#">#</a>
+        </p>
+    </div>
+</footer>
+
